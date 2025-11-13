@@ -85,7 +85,10 @@ To set up your cloud credentials and project secrets, follow these steps:
 
 4.  **Create Secret Variables File:**
     Inside the `terraform/` folder, create a new file named `terraform.tfvars`.
-    > **Important:** This file contains secrets and is already listed in `.gitignore` to prevent it from being uploaded to Git.
+
+    ![WordPress Installation Screen](./images/terraform_tfvars.png)
+
+    > **Important:** This file contains secrets and is already listed in `.gitignore` to prevent it from being uploaded to Git, for security reasons.
 
 5.  **Fill in `terraform.tfvars`:**
     Copy the content below into `terraform/terraform.tfvars` and fill in your values:
@@ -149,7 +152,7 @@ To check if the deployment was successful:
     vm_external_ip = "34.50.123.162"
     ```
 
-2.  **Wait 2-3 Minutes:**
+2.  **Wait 3-5 Minutes:**
     Allow time for the VM's startup script to finish (installing Docker, cloning, and downloading images).
 
     You can also log in to the VM to confirm the Docker services are running.
