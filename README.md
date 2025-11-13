@@ -21,7 +21,7 @@ This repository is structured to meet the assignment requirements:
 │   ├── secgroup.tf
 │   ├── startup-script.sh.tftpl
 │   ├── variables.tf
-│   └── vpc.tftpl
+│   └── vpc.tf
 ├── .gitignore
 └── README.md
 ```
@@ -167,7 +167,7 @@ To check if the deployment was successful:
         ```
     * You should see both the `db` and `wordpress` services running with a `State` of `Up`.
 
-    ![Docker Services Running](./images/service_running.png)
+    ![Docker Services Running](./images/svc_run.png)
 
 3.  **Open Your Browser:**
     Open a web browser and navigate to the IP you received, on port 8080.
