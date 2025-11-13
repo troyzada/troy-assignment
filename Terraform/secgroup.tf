@@ -24,7 +24,7 @@ resource "google_compute_firewall" "allow_http" {
 
 resource "google_compute_firewall" "allow_mysql" {
   name    = "sirclo-vpc-1-allow-mysql"
-  network = google_compute_network.vpc_0.name
+  network = google_compute_network.sirclo_vpc_1.name
 
   allow {
     protocol = "tcp"
