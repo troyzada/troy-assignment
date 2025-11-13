@@ -1,0 +1,27 @@
+#!/bin/bash
+set -e
+# Update package list
+apt-get update -y
+
+# Install Docker
+apt-get install -y docker.io
+
+# Install Docker Compose & auto-start Docker service
+apt-get install -y docker-compose
+systemctl start docker
+systemctl enable docker
+
+# create dir and clone repo
+mkdir -p /srv/app
+git clone "${repo_url}" /srv/app
+
+cd /srv/app/app
+
+cat << EOF > .env
+MYSQL_DATABASE=${db_name}
+MYSQL_USER=${db_user}
+MYSQL_PASSWORD=${db_pass}
+MYSQL_ROOT_PASSWORD=${db_root_pass}
+EOF
+
+docker-compose up -d

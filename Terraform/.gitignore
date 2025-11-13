@@ -1,0 +1,10 @@
+app/.env
+*.tfvars
+*.tfstate
+*.tfstate.*
+.terraform/
+.terraform.lock.hcl
+crash.log
+crash.*.log
+.DS_Store
+Thumbs.db
