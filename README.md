@@ -6,6 +6,50 @@ The entire process, from a single `terraform apply` command to a live WordPress 
 
 ---
 
+## 📂 Submission Structure
+
+This repository is structured to meet the assignment requirements:
+```bash
+/troy-assignment/
+├── app/
+│   ├── .env.example
+│   └── docker-compose.yml
+├── images/
+├── terraform/
+│   ├── instance.tf
+│   ├── main.tf
+│   ├── secgroup.tf
+│   ├── startup-script.sh.tftpl
+│   ├── variables.tf
+│   └── vpc.tftpl
+├── .gitignore
+└── README.md
+```
+
+---
+
+## Explanation of Each File/Folder
+
+* **`app/`**: Contains all application-related files for **Task 2**.
+    * `docker-compose.yml`: Defines the `db` (MySQL) and `wordpress` services, their networking, and volumes.
+    * `.env.example`: A template file showing the required environment variables (like database passwords) needed by `docker-compose`.
+
+* **`images/`**: Holds all screenshots used in this `README.md` for documentation and verification.
+
+* **`terraform/`**: Contains all the modular Infrastructure as Code (IaC) files for **Task 1**.
+    * `main.tf`: The main entrypoint that configures the Google Cloud provider.
+    * `variables.tf`: Declares all input variables (e.g., `gcp_project_id`, `git_repo_url`, `mysql_password`).
+    * `instance.tf`: Defines the GCP Compute Engine VM (`e2-micro`), including its OS image and network interface.
+    * `secgroup.tf`: Defines the firewall rules (equivalent to Security Groups) to allow ports 22 (SSH) and 8080 (App).
+    * `vpc.tf`: Defines the custom VPC and public subnet for the application.
+    * `startup-script.sh.tftpl`: A *template* for the VM's startup script. Terraform injects secrets into this file to automate the `git clone` and `docker-compose up` process.
+
+* **`.gitignore`**: A critical security file that tells Git to **ignore** sensitive files like `terraform.tfvars`, `app/.env`, and local state files (`*.tfstate`).
+
+* **`README.md`**: This documentation file for **Task 3**, explaining the project's purpose, setup, and how to run, verify, and clean up the deployment.
+
+---
+
 ### Prerequisites
 
 The following software must be installed on your local machine to run this code:
@@ -48,7 +92,7 @@ To set up your cloud credentials and project secrets, follow these steps:
 
     ```bash
     # Replace with your PUBLIC Git repository URL
-    git_repo_url = "[https://github.com/troyzada/troy-assignment.git](https://github.com/troyzada/troy-assignment.git)"
+    git_repo_url = "https://github.com/troyzada/troy-assignment.git"
 
     # --- Database Secrets ---
     # The startup-script.sh.tftpl script will create a .env file on the VM using these values
@@ -143,7 +187,14 @@ To destroy all infrastructure created in GCP and stop all billing:
 
 1.  Ensure you are in the `terraform/` directory.
 2.  Run the `destroy` command:
+
     ```bash
     terraform destroy
     ```
+
     Type `yes` when prompted to confirm.
+
+    ![WordPress Installation Screen](./images/destroy.png)
+    
+
+--- 
